@@ -1,32 +1,179 @@
-## Dataset Information
+# Causal Inference & Synthetic Control Engine for Algorithmic Pricing
 
-### Data Source
-This project uses a synthetic (simulated) dataset created for educational and analytical purposes. It does not contain real company or customer transaction records.
+> **Data Analytics Project | Zaalima Development**  
+> Estimating the revenue gap associated with a simulated algorithmic-pricing intervention using synthetic control.
 
-### Dataset Overview
-- Total records: 540
-- Total columns: 11
-- Regions: North, South, and West
-- Data frequency: Daily
-- Date range: January 1, 2025 – June 29, 2025
+## Project Overview
 
-### Key Variables
-- `our_price`: Our product selling price
-- `competitor_price`: Simulated competitor price
-- `units_sold`: Number of units sold
-- `revenue`: Daily sales revenue
-- `treatment`: Indicates exposure to the simulated pricing intervention
-- `period`: Identifies pre-treatment and post-treatment periods
+This project explores whether a simulated pricing intervention in one region is followed by a revenue change relative to an estimated counterfactual built from untreated regions.
 
-### Important Note
-The North region is assigned a simulated price increase beginning May 1, 2025. South and West are potential comparison regions for the synthetic control analysis. All findings are for demonstration and learning purposes and should not be interpreted as real-world business results.
+**Business question:** How did North's revenue compare with an estimate of what North might have earned without the simulated pricing intervention?
 
-## Data Validation (Week 1)
+The workflow includes data validation, exploratory data analysis (EDA), causal assumptions represented with a Directed Acyclic Graph (DAG), treatment-period preparation, synthetic-control estimation, and robustness checks.
 
-| Notebook | Owner | What it checks |
-| --- | --- | --- |
-| `01_data_validation.ipynb` | Harishwar | Missing values, duplicate rows, data types, treatment labels; exports cleaned CSV |
-| `01b_data_validation_extended.ipynb` | Dhananjay | One row per region per day, revenue = price × units, outliers, PASS/FAIL summary |
+> **Important:** The dataset is synthetic and intended for educational and analytical purposes. It does not contain real company or customer transactions. Estimates are methodological demonstrations, not proof of real-world business impact.
 
-**Result:** all checks pass. 540 rows (3 regions × 180 days), no missing values, gaps or duplicates.
-Only North is treated: its price rises about 7% from 1 May 2025, while South and West stay flat and form the donor pool.
+## Dataset at a Glance
+
+| Item | Description |
+|---|---|
+| Dataset | `project1_algorithmic_pricing_synthetic_dataset.csv` |
+| Observations | 540 |
+| Variables | 11 |
+| Regions | North, South, West |
+| Frequency | Daily |
+| Date range | January 1 – June 29, 2025 |
+| Treated region | North |
+| Intervention date | May 1, 2025 |
+| Comparison / donor regions | South and West |
+| Simulated intervention | Approximately 7% price increase in North |
+
+### Key variables
+
+- `date` — observation date
+- `region` — North, South, or West
+- `our_price` — simulated selling price
+- `competitor_price` — simulated competitor price
+- `units_sold` — units sold
+- `revenue` — sales revenue
+- `treatment` — intervention indicator
+- `period` — pre-treatment or post-treatment period
+- `marketing_spend` — simulated marketing expenditure
+- `promotion_active` — promotion indicator
+- `product_category` — product category
+
+## Methodology
+
+### 1. Data validation
+
+Check missing values, duplicate rows and date-region-category combinations, date coverage, data types, negative or invalid numeric values, treatment labels, revenue consistency, and potential outliers.
+
+### 2. Exploratory data analysis
+
+Compare total revenue by region, average own price versus competitor price, and revenue trends over time. These summaries help characterize the data before causal modelling.
+
+### 3. Causal assumptions and treatment timing
+
+A Directed Acyclic Graph (DAG) documents assumed relationships among treatment, price, units sold, revenue, competitor prices, marketing, and promotions. North is treated from May 1, 2025; South and West are potential donor regions.
+
+A DAG records assumptions; it does not prove causality.
+
+### 4. Synthetic-control estimation
+
+The model selects non-negative weights for South and West that sum to one, aiming to reproduce North's revenue during the pre-treatment period.
+
+The synthetic counterfactual is:
+
+$$
+\widehat{Y}_{North,t}
+= w_{South}Y_{South,t} + w_{West}Y_{West,t}
+$$
+
+The estimated revenue gap is:
+
+$$
+Gap_t = Y_{North,t} - \widehat{Y}_{North,t}
+$$
+
+A positive gap means observed North revenue is above synthetic North revenue. Interpreting that gap causally requires credible counterfactual assumptions.
+
+### 5. Model fit and robustness
+
+- **Pre-treatment RMSE / normalized RMSE:** assesses how closely synthetic North matches actual North before the intervention.
+- **Placebo-in-time checks:** assign false intervention dates before the actual date and inspect the resulting gaps.
+- **Daily versus weekly comparison:** assesses whether estimates depend on aggregation frequency.
+- **Donor sensitivity:** compares South and West together and each donor separately.
+- **Visual diagnostics:** plots actual and synthetic revenue and the gap over time.
+
+**Timing note:** The week ending May 4, 2025 includes both pre- and post-intervention days. Weekly post-treatment calculations should handle this boundary week explicitly; daily analysis can use May 1 as the intervention date.
+
+## Repository Guide
+
+| File | Purpose |
+|---|---|
+| `01_data_validation.ipynb` | Initial data-quality checks and cleaned-data export |
+| `01b_data_validation_extended.ipynb` | Extended data-quality checks and validation summary |
+| `Exploratory Data Analysis.ipynb` | Regional revenue, price comparisons, and revenue trends |
+| `Causal DAG.ipynb` | Causal assumptions and DAG-related analysis |
+| `Treatment period & integration.ipynb` | Defines treatment timing and exports pre/post-period datasets |
+| `02_model_data_prep.ipynb` | Prepares daily and weekly modelling tables |
+| `03_model_data_validation.ipynb` | Validates prepared model inputs |
+| `03_synthetic_control.ipynb` | Synthetic-control estimation and revenue-gap analysis |
+| `04_model_input_assumption_checks.ipynb` | Checks modelling inputs and assumptions |
+| `week1_report.md` | Week 1 progress and findings |
+| `week2_synthetic_control.ipynb` | Week 2 synthetic-control work |
+| `05_synthetic_control_robustness.ipynb` | Original robustness setup and placebo analysis |
+| `05_synthetic_control_robustness_updated.ipynb` | Expanded robustness checks; currently on the `Dhananjay` branch unless merged |
+| `project1_algorithmic_pricing_synthetic_dataset.csv` | Synthetic input dataset |
+| `project1_algorithmic_pricing_cleaned.csv` | Cleaned-data output, if generated by the validation workflow |
+
+## Running the notebooks
+
+The notebooks are intended for a Python/Jupyter environment.
+
+1. Clone or download the repository.
+2. Install common dependencies:
+
+   ```bash
+   pip install pandas numpy matplotlib scipy seaborn networkx jupyter
+   ```
+
+3. Start Jupyter from the repository directory:
+
+   ```bash
+   jupyter notebook
+   ```
+
+4. Open a notebook and run its cells in order.
+5. Check that the CSV path matches the dataset filename in the repository.
+6. Review errors, warnings, generated plots, and exported files before relying on the results.
+
+Some notebooks may require additional packages, such as DoWhy. Install any missing package named in the notebook's error message.
+
+## Preliminary Findings
+
+Earlier notebook outputs reported a positive post-intervention revenue gap of roughly **3–4%**, with the exact estimate depending on daily versus weekly aggregation and how the intervention boundary is handled. Previously reported normalized pre-treatment RMSE was approximately **4% weekly** and **10% daily**.
+
+These figures are preliminary, specification-dependent results on a simulated dataset. Re-run the latest notebook and verify its outputs before quoting a final estimate. Donor sensitivity has produced materially different estimates when South and West are used separately, so the gap should not be presented as definitive causal proof.
+
+## Limitations and Open Checks
+
+- The dataset is simulated, not real business data.
+- The donor pool contains only two regions.
+- Estimates may be sensitive to donor choice and data frequency.
+- Good pre-treatment fit does not guarantee a valid post-treatment counterfactual.
+- Placebo checks are diagnostic; they do not by themselves establish statistical significance.
+- The Week 1 report flags differences between recorded revenue and `our_price × units_sold`. Reconcile this with the validation notebook's reported status before claiming that revenue consistency is fully resolved.
+- The project brief mentions Double Machine Learning (DML); verify its implementation before claiming it is complete.
+- Dashboard and final-report deliverables should be marked complete only once implemented and verified.
+
+## Team Contributions
+
+The descriptions below summarize work visible in the repository branches and notebooks. They describe documented artifacts, not a claim that every cell has been independently validated.
+
+### Harishwar
+
+- **Initial data validation:** checks missing values, duplicates, data types, invalid dates and numeric values, region values, and treatment assignment; includes a cleaned-data export.
+- **Exploratory data analysis:** examines region-wise revenue, own versus competitor pricing, and daily revenue trends.
+- **Causal DAG:** documents assumed relationships among treatment, prices, units sold, revenue, marketing, promotions, and competitor pricing; includes DoWhy-related identification code.
+- **Treatment-period integration:** defines the intervention date, separates pre- and post-treatment observations, and exports the two datasets.
+- **Week 1 reporting:** documents the dataset, validation, EDA, and causal assumptions.
+- **Week 2 synthetic control:** prepares regional revenue data, optimizes donor weights, constructs synthetic North, calculates revenue gaps, plots the actual and synthetic series, and exports results.
+
+### Dhananjay Lingam
+
+- **Extended data validation:** expanded checks for date-region-category uniqueness, date coverage, revenue consistency, outliers, and a PASS/FAIL summary.
+- **Treatment-period preparation:** worked on defining the intervention date and separating pre- and post-treatment data.
+- **Synthetic-control analysis:** worked on preparing regional revenue series, fitting donor weights, comparing actual North with synthetic North, and assessing the revenue gap and pre-treatment fit.
+- **Expanded robustness analysis:** added checks for placebo dates, daily versus weekly estimates, donor sensitivity, and visual diagnostics. The weekly analysis also calls attention to the mixed week ending May 4.
+- **Integration and review preparation:** organized project work on the `Dhananjay` branch and prepared methodology, limitations, and review materials.
+
+## Project Status
+
+The repository documents work on data validation, EDA, causal assumptions, treatment-period preparation, synthetic-control estimation, and robustness analysis. Treat Week 3 robustness as in progress until final outputs are rerun and checked. Treat any dashboard or DML component as incomplete unless its implementation can be demonstrated.
+
+## Disclaimer
+
+This project is for educational and methodological demonstration only. It is not a recommendation for real-world pricing decisions and should not be interpreted as verified causal effects.
+
+
