@@ -190,6 +190,22 @@ The descriptions below summarize work visible in the repository branches and not
 - **Expanded robustness analysis:** added checks for placebo dates, daily versus weekly estimates, donor sensitivity, and visual diagnostics. The weekly analysis also calls attention to the mixed week ending May 4.
 - **Integration and review preparation:** organized project work on the `Dhananjay` branch and prepared methodology, limitations, visualisations, and review materials.
 
+## Individual Donor Pre-Treatment Fit
+
+A follow-up diagnostic compared each donor region directly with North before May 1, 2025. Each standalone donor has weight 1 in this diagnostic.
+
+| Frequency | Donor | Normalized RMSE | Correlation with North | Average revenue level vs North |
+|---|---|---:|---:|---:|
+| Weekly | South | 10.16% | 0.793 | 9.40% lower |
+| Weekly | West | 9.24% | 0.736 | 7.39% higher |
+| Daily | South | 13.80% | 0.485 | 9.25% lower |
+| Daily | West | 14.45% | 0.403 | 7.32% higher |
+
+South has the stronger weekly correlation, while West has a slightly lower weekly standalone RMSE. Neither is clearly superior across all diagnostics. South's average revenue level is below North's, while West's is above North's. This helps explain why the single-donor post-period estimates have opposite signs.
+
+The result is a warning about donor sensitivity, not evidence that either donor should be selected to obtain a preferred result. The weighted two-donor model fits the pre-treatment period better, but this does not prove that it is the true counterfactual. See `DONOR_SENSITIVITY_INVESTIGATION_2026-11-02.md` for the detailed diagnostics and limitations.
+
+
 ## Project Status
 
 The repository documents work on data validation, EDA, causal assumptions, treatment-period preparation, synthetic-control estimation, and robustness analysis. Treat robustness as in progress until all checks and outputs have been rerun and reviewed. Treat any dashboard or DML component as incomplete unless its implementation can be demonstrated.
