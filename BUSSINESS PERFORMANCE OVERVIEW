@@ -1,0 +1,32 @@
+## Page 1 – Business Performance Overview
+
+The Business Performance Overview dashboard provides a consolidated view of the overall business performance through key performance indicators (KPIs) and interactive data visualizations. It helps users monitor revenue, transactions, units sold, and profit while understanding the contribution of individual regions to the overall business.
+
+### Key Performance Indicators (KPIs)
+
+The dashboard highlights four important business metrics:
+
+- **Total Revenue – 34M:** Represents the overall revenue generated across all regions during the selected analysis period.
+- **Total Transactions – 540:** Displays the total number of transactions recorded in the dataset.
+- **Total Units Sold – 67K:** Indicates the total quantity of products sold across all regions.
+- **Profit – 10M:** Displays the estimated profit calculated using the project's assumed cost percentage. This is an illustrative estimate, not actual company-reported profit.
+
+### Monthly Revenue Analysis
+
+The monthly revenue column chart is designed to display revenue distribution across different months. It helps users examine monthly business performance and identify changes in revenue over time. Monthly comparisons should be interpreted after verifying that the month-level aggregation is working correctly.
+
+### Sales by Region
+
+The regional sales pie chart compares the revenue contribution of the three regions:
+
+- **West:** 12.16M (35.98%)
+- **North:** 11.42M (33.78%)
+- **South:** 10.22M (30.24%)
+
+West contributes the largest share of the displayed regional revenue, followed by North and South. These percentages show how total revenue is distributed across the three regions.
+
+### Business Insights and Purpose
+
+This dashboard provides a high-level understanding of business performance by combining revenue, transaction volume, product sales, estimated profit, and regional contribution in a single view. It helps stakeholders monitor important business metrics, compare regional performance, and identify areas that may require further analysis.
+
+**Tools Used:** Power BI, DAX, CSV Dataset, Data Visualization.
