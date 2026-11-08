@@ -1,0 +1,32 @@
+Member 1 – Data & Notebook Verification
+Your role
+
+- All notebooks run without errors.
+- Dataset and output CSV files verify pannanum.
+- SCM robustness and placebo results verify pannanum.
+- Final outputs consistent-ah irukka check pannanum.
+  
+  Member 2 – SCM Documentation
+- Create scm_results.md.
+- Explain donor weights and pre-treatment fit.
+- Explain average and cumulative post-treatment gap.
+- Document robustness and placebo findings.
+  
+  Member 3 – Model Comparison
+- Create model_comparison.md.
+- Compare Synthetic Control, DiD and DML.
+- Explain why results differ.
+- Document assumptions and limitations.
+  
+  Member 4 – Power BI Dashboard
+- Complete all 5 dashboard pages.
+- Add KPI cards, charts and slicers.
+- Add Actual North vs Synthetic North visual.
+- Verify dashboard values against CSV outputs.
+- Save final .pbix and screenshots.
+  
+  Member 5 – Final Report & Presentation
+- Update final_report.md.
+- Update README.
+- Prepare project presentation.
+- Prepare project demo and interview explanation.
