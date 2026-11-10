@@ -1,0 +1,89 @@
+ZAALIMA PROJECT — DAILY GITHUB TASK ALLOCATION Dashboard ownership:
+Dhananjay Assigned pages: Page 4 — Causal Impact Analysis; Page 5 —
+Model Validation & Robustness Target review: 12 November 2026
+
+PURPOSE Make one meaningful, verifiable GitHub commit each day based on
+completed work. Do not create commits just to increase the commit count.
+Do not upload unfinished or unverified outputs as final results. Keep
+Power BI styling consistent with the existing report: Cambria Math
+headings, maroon title text, gold/yellow title bar, pale-yellow KPI
+cards, and a light background.
+
+DAY 1 — 10 NOVEMBER 2026 Focus: Page 4 foundation and analytical data
+preparation Tasks: 1. Inspect the existing Power BI tables and identify
+the exact daily and weekly revenue fields. 2. Verify the North
+pre-treatment and post-treatment average revenue figures. 3. Verify the
+weekly Synthetic Control donor weights: South 47.167%, West 52.833%. 4.
+Create and test the Actual North and Synthetic North measures using the
+weekly table. 5. Start Page 4 with the title and four KPI cards: - North
+pre-treatment average revenue: 61,944.39 - North post-treatment average
+revenue: 66,366.44 - DiD estimate: 1,940.31 revenue units per day -
+Weekly SCM post-treatment gap: +3.05% 6. Save the Power BI file and
+capture a screenshot of the completed work.
+
+Suggested GitHub commit: “Add Page 4 causal impact KPIs and SCM
+measures”
+
+Commit evidence: - Updated Power BI file or agreed dashboard artefact -
+Screenshot of Page 4 KPI section - Short note listing the measures and
+their source tables
+
+DAY 2 — 11 NOVEMBER 2026 Focus: Complete Page 4 and build Page 5
+Tasks: 1. Complete the Actual North vs Synthetic North weekly line
+chart. 2. Add the intervention date marker for 1 May 2025, where
+supported by the visual. 3. Add a treated-versus-control pre/post
+comparison. 4. Add a clear explanation of the DiD calculation and label
+it as a preliminary estimate. 5. Create Page 5 with the same typography
+and colour palette. 6. Add SCM donor weights: South 47.17%, West 52.83%.
+7. Add pre-treatment fit KPIs: - Weekly NRMSE: 3.98% - Daily NRMSE:
+9.76% 8. Add donor sensitivity: - Both donors: +3.05% - South only:
++14.49% - West only: -5.40% 9. Add exploratory placebo results: - 1
+February: -1.288% - 1 March: -1.773% - 1 April: -2.506% 10. Add a
+concise SCM / DiD / DML comparison.
+
+Suggested GitHub commit: “Build model validation and robustness
+dashboard page”
+
+Commit evidence: - Updated Power BI file or agreed dashboard artefact -
+Screenshots of Page 4 and Page 5 - Short note describing the charts and
+displayed metrics
+
+DAY 3 — 12 NOVEMBER 2026 Focus: Validation, documentation and final
+review Tasks: 1. Check all dashboard values against the analysis
+notebooks and reports. 2. Confirm that the weekly SCM model is not mixed
+with the older 50/50 donor-weight specification. 3. Check all titles,
+units, decimal places, legends, axes, and date labels. 4. Clearly flag
+that the dataset is synthetic and findings are methodological examples,
+not real business results. 5. State that donor sensitivity is high and
+the SCM gap is preliminary, not proof of a causal effect. 6. State that
+the DiD estimate requires a parallel-trends assessment before causal
+interpretation. 7. State that DML is exploratory and has no common
+support; do not display its coefficients as validated causal effects. 8.
+Capture final screenshots and prepare a short summary of your
+contribution. 9. Commit only the final verified changes.
+
+Suggested GitHub commit: “Validate and document causal impact and
+robustness dashboard”
+
+Commit evidence: - Final Power BI file or agreed dashboard artefact -
+Final screenshots of Pages 4 and 5 - Brief validation note and known
+limitations
+
+IMPORTANT ANALYTICAL NOTES - Dataset: synthetic; 540 rows, 3 regions,
+daily observations from 1 January to 29 June 2025. - North is the
+simulated treated region; intervention begins 1 May 2025. - South and
+West are comparison/donor regions. - Weekly SCM post-treatment gap:
++3.047%; donor weights: South 47.167%, West 52.833%. - Daily SCM
+post-treatment gap: +4.401%; daily weights differ from weekly weights. -
+Weekly and daily NRMSE: 3.979% and 9.760%, respectively. - Donor
+sensitivity: both donors +3.047%; South only +14.492%; West only
+-5.395%. - Placebo results are exploratory because the pre-period
+fitting windows are short. - DiD estimate from the existing notebook:
++1,940.31 revenue units per day. It is not a validated causal effect
+without assessing the parallel-trends assumption and uncertainty. - DML
+propensity models perfectly separate treatment and control (AUC 1.00)
+and show no common support. DML estimates must not be presented as
+causal effects. - Do not combine outputs from different SCM
+specifications without clearly labelling them. - Make commits only for
+work actually completed. If a task is unfinished, commit the completed
+portion with an accurate message or move it to the next day.
