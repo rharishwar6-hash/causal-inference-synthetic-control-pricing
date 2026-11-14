@@ -1,0 +1,141 @@
+# Causal Inference & Synthetic Control for Algorithmic Pricing
+
+## 1. Project Overview
+
+This project analyzes the impact of algorithmic pricing strategies on revenue using Causal Inference and Synthetic Control Methods.
+
+The main objective is to understand whether a price change leads to an actual increase in revenue and to estimate the causal impact of the pricing intervention.
+
+The project combines Python, SQL-based analytical concepts, statistical methods, and Power BI to evaluate pricing performance across different regions.
+
+## 2. Dataset Description
+
+- Dataset: `project1_algorithmic_pricing_synthetic_dataset.csv`
+- Data Type: Synthetic / Simulated Dataset
+- Total Records: 540 rows
+- Time Period: January 1, 2025 – June 29, 2025
+- Regions: North, South, West
+- North: Treatment Region
+- South and West: Control / Donor Regions
+- Intervention Date: May 1, 2025
+
+The dataset contains pricing, competitor pricing, units sold, revenue, marketing spend, promotional activity, treatment, and period information.
+
+**Note:** This is a simulated teaching dataset, not real company data.
+
+## 3. Data Preparation & Validation
+
+- Checked missing values and duplicate records.
+- Verified data types and date formats.
+- Validated price, revenue, and sales information.
+- Checked treatment and control region assignments.
+- Identified pre-intervention and post-intervention periods.
+- Created daily and weekly revenue datasets.
+- Prepared data for causal analysis and Power BI.
+
+### Prepared Datasets
+- `daily_wide_revenue.csv`
+- `weekly_wide_revenue.csv`
+
+## 4. Exploratory Data Analysis (EDA)
+
+Performed exploratory analysis to understand:
+
+- Regional revenue performance.
+- Pricing trends.
+- Units sold and demand patterns.
+- Competitor price comparisons.
+- Marketing spend.
+- Promotional activity.
+- Pre-treatment and post-treatment trends.
+
+## 5. Causal Inference Methods
+
+### Difference-in-Differences (DiD)
+Used to estimate the revenue impact of the pricing intervention by comparing treatment and control regions.
+
+### Double Machine Learning (DML)
+Used to estimate the causal effect of pricing while controlling for other variables.
+
+### Synthetic Control Method (SCM)
+Created a synthetic version of the North region using South and West as donor regions to estimate what North's revenue might have been without the intervention.
+
+### Causal DAG
+Used DoWhy concepts to represent relationships between pricing, revenue, and potential confounding variables.
+
+## 6. Synthetic Control & Robustness Testing
+
+- Compared actual North revenue against synthetic North revenue.
+- Evaluated donor weights.
+- Tested South-only and West-only donor scenarios.
+- Calculated pre-intervention Mean Squared Prediction Error (MSPE).
+- Evaluated post-intervention revenue gaps.
+- Compared alternative donor combinations.
+
+Baseline donor weights:
+- South: 50%
+- West: 50%
+
+Baseline results:
+- Pre-intervention MSE: 36,627,510.23
+- Pre-intervention RMSE: 6,052.07
+- Post-intervention Average Gap: 2,537.58
+- Cumulative Revenue Gap: 152,254.85
+
+## 7. Power BI Dashboard
+
+Created an interactive Power BI dashboard with three analytical pages.
+
+### Page 1 – Executive Overview
+- Overall revenue performance.
+- KPI cards.
+- Revenue trend analysis.
+- Revenue distribution.
+
+### Page 2 – Regional Analysis
+- North, South, and West revenue comparison.
+- Regional performance analysis.
+- Revenue growth trends.
+- Regional KPI metrics.
+
+### Page 3 – Pricing & Demand Analysis
+- Pricing performance.
+- Demand and sales analysis.
+- Promotional activity.
+- Pricing and revenue relationship.
+- Comparative analytical visuals.
+
+## 8. Technologies Used
+
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Scikit-learn
+- EconML
+- DoWhy
+- Jupyter Notebook
+- Power BI
+- DAX
+- Git & GitHub
+
+## 9. Key Project Outcomes
+
+- Evaluated the impact of algorithmic pricing on revenue.
+- Applied multiple causal inference techniques.
+- Estimated treatment effects using DML and DiD.
+- Constructed a synthetic control region.
+- Performed donor-weight sensitivity analysis.
+- Compared actual and counterfactual revenue.
+- Developed an interactive Power BI dashboard.
+
+## 10. Conclusion
+
+This project demonstrates how causal inference techniques can help businesses evaluate pricing decisions beyond simple revenue comparisons.
+
+By combining Difference-in-Differences, Double Machine Learning, and Synthetic Control Methods, the analysis provides multiple perspectives on the estimated impact of a pricing intervention.
+
+The Power BI dashboard presents the analytical findings in an accessible and interactive format.
+
+**Disclaimer:** Results are based on synthetic data and should be interpreted as an educational demonstration rather than evidence of real-world business impact.
